@@ -6,13 +6,16 @@ import {
   View,
   ScrollView,
   FlatList,
+  Pressable,
 } from "react-native";
 
 export default function GoalItem(props) {
   return (
-    <View style={styles.goalItemContainer}>
-      <Text style={styles.goalText}>{props.text}</Text>
-    </View>
+    <Pressable onPress={props.onDelete.bind(this, props.id)}>
+      <View style={styles.goalItemContainer}>
+        <Text style={styles.goalText}>{props.text}</Text>
+      </View>
+    </Pressable>
   );
 }
 

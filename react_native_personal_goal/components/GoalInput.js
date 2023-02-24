@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   FlatList,
+  Modal,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -22,25 +23,51 @@ export default function GoalInput(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={{ borderWidth: 0, flex: 1, marginRight: 8, padding: 10 }}
-        placeholder="Type here your next goal"
-        onChangeText={onGoalChangedHandler}
-        value={currentGoal}
-      ></TextInput>
-      <Button title="Add goal" onPress={addNewGoalHandler}></Button>
-    </View>
+    <Modal visible={props.isVisible} animationType="fade">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder="Type here your next goal"
+          onChangeText={onGoalChangedHandler}
+          value={currentGoal}
+        ></TextInput>
+        <View style={styles.buttonOkCencelBlockStyle}>
+          <View style={styles.bottonStyle}>
+            <Button
+              color="#222660"
+              title="Add goal"
+              onPress={addNewGoalHandler}
+            ></Button>
+          </View>
+          <View style={styles.bottonStyle}>
+            <Button color="#222660" title="Cancel" onPress={props.onClose} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
-    marginBottom: 30,
+    marginHorizontal: 16,
+  },
+  textInputStyle: {
+    // borderWidth: 1,
+    color: "#222660",
+    width: "100%",
+    padding: 8,
+    marginBottom: 10,
+  },
+  buttonOkCencelBlockStyle: {
+    flexDirection: "row",
+  },
+  bottonStyle: {
+    width: "25%",
+    marginHorizontal: 10,
   },
 });
